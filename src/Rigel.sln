@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigel.Core", "Rigel.Core\Rigel.Core.csproj", "{1C42B25E-122E-4908-A7E2-0A66F6F0AC05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigel.EFCore", "Rigel.EFCore\Rigel.EFCore.csproj", "{73C2E419-CBDE-4A67-AC5A-B8B3D26E598C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigel.Services", "Rigel.Services\Rigel.Services.csproj", "{BE82C400-882F-4C3F-9663-10583A486EBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigel.Helpers", "Rigel.Helpers\Rigel.Helpers.csproj", "{7081C7E0-CAE3-4EE9-9280-662D2EDACBAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigel.MVC", "Rigel.MVC\Rigel.MVC.csproj", "{BB8801D2-9E20-4360-88BB-982B78B295E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigel.Tests", "Rigel.Tests\Rigel.Tests.csproj", "{50C8AF44-0D8B-40B3-BD6A-12210B42033D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigel.Migrations", "Rigel.Migrations\Rigel.Migrations.csproj", "{C782C5AA-CB8B-4F8E-9BAD-76A017894CA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C42B25E-122E-4908-A7E2-0A66F6F0AC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C42B25E-122E-4908-A7E2-0A66F6F0AC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C42B25E-122E-4908-A7E2-0A66F6F0AC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C42B25E-122E-4908-A7E2-0A66F6F0AC05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73C2E419-CBDE-4A67-AC5A-B8B3D26E598C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73C2E419-CBDE-4A67-AC5A-B8B3D26E598C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73C2E419-CBDE-4A67-AC5A-B8B3D26E598C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73C2E419-CBDE-4A67-AC5A-B8B3D26E598C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE82C400-882F-4C3F-9663-10583A486EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE82C400-882F-4C3F-9663-10583A486EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE82C400-882F-4C3F-9663-10583A486EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE82C400-882F-4C3F-9663-10583A486EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7081C7E0-CAE3-4EE9-9280-662D2EDACBAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7081C7E0-CAE3-4EE9-9280-662D2EDACBAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7081C7E0-CAE3-4EE9-9280-662D2EDACBAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7081C7E0-CAE3-4EE9-9280-662D2EDACBAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8801D2-9E20-4360-88BB-982B78B295E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8801D2-9E20-4360-88BB-982B78B295E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8801D2-9E20-4360-88BB-982B78B295E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8801D2-9E20-4360-88BB-982B78B295E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50C8AF44-0D8B-40B3-BD6A-12210B42033D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50C8AF44-0D8B-40B3-BD6A-12210B42033D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50C8AF44-0D8B-40B3-BD6A-12210B42033D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C8AF44-0D8B-40B3-BD6A-12210B42033D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C782C5AA-CB8B-4F8E-9BAD-76A017894CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C782C5AA-CB8B-4F8E-9BAD-76A017894CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C782C5AA-CB8B-4F8E-9BAD-76A017894CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C782C5AA-CB8B-4F8E-9BAD-76A017894CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
