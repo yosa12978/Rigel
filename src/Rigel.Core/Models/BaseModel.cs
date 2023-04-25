@@ -1,4 +1,4 @@
-namespace Rigel.Core 
+namespace Rigel.Core.Models
 {
     public class BaseModel<T>
     {

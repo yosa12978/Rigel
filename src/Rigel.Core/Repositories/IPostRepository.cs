@@ -1,7 +1,9 @@
-namespace Rigel.Core
+using Rigel.Core.Models;
+
+namespace Rigel.Core.Repositories
 {
     public interface IPostRepository : IBaseRepository<Post, string>
     {
-
+        Task<List<Post>> FindCategoryPosts(string categoryId);
     }
 }

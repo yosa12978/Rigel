@@ -1,4 +1,6 @@
-namespace Rigel.Core
+using Rigel.Core.Models;
+
+namespace Rigel.Core.Repositories
 {
     public interface IUserRepository : IBaseRepository<User, string>
     {
