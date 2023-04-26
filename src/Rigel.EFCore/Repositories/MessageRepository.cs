@@ -15,5 +15,13 @@ namespace Rigel.EFCore.Repositories
                             .OrderBy(x => x.pubDate)
                             .ToListAsync();
         }
+
+        public async Task<List<Message>> FindUserMessages(string userId)
+        {
+            return await _db.messages
+                            .Where(x => x.authorId == userId)
+                            .OrderByDescending(x => x.pubDate)
+                            .ToListAsync();
+        }
     }
 }

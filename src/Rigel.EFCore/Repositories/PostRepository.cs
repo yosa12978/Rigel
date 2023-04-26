@@ -16,5 +16,13 @@ namespace Rigel.EFCore.Repositories
                             .OrderByDescending(x => x.changeDate)
                             .ToListAsync();
         }
+
+        public async Task<List<Post>> FindUserPosts(string userId)
+        {
+            return await _db.posts
+                            .Where(x => x.authorId == userId)
+                            .OrderByDescending(x => x.pubDate)
+                            .ToListAsync();
+        }
     }
 }
