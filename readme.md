@@ -1,6 +1,6 @@
 # Rigel
 
-## simple forum engine
+simple forum engine
 
 ![Logo](logo.png)
 
