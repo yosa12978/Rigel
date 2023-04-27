@@ -1,4 +1,4 @@
-namespace Rigel.Dtos
+namespace Rigel.Dtos.Response
 {
     public class PostDto 
     {

@@ -1,6 +1,8 @@
 # Rigel
 
-simple forum engine built with C#
+## simple forum engine
+
+![Logo](logo.png)
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/yosa12978/rigel?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/yosa12978/Rigel)
