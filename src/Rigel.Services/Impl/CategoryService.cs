@@ -11,14 +11,22 @@ namespace Rigel.Services.Impl
             _categoryRepository = categoryRepository;
             _idgen = idgen;
         }
-        public Task<CategoryDto> CreateCategory(CreateCategoryDto dto, string userId)
+        public async Task<CategoryDto> CreateCategory(CreateCategoryDto dto, string userId)
         {
-            throw new NotImplementedException();
+            Category category = new Category
+            {
+                name = dto.name,
+            };
+            // todo do smth with userid;
+            return CategoryDto.MapToDto(await _categoryRepository.Create(category));
         }
 
-        public Task<CategoryDto> DeleteCategory(string id, string userId)
+        public async Task<CategoryDto> DeleteCategory(string id, string userId)
         {
-            throw new NotImplementedException();
+            Category? category = await _categoryRepository.FindById(id);
+            if (category == null) // todo do smth with userid
+                throw new NotFoundException("category not found");
+            return CategoryDto.MapToDto(await _categoryRepository.Delete(category));
         }
 
         public async Task<List<CategoryDto>> FindAll()
@@ -35,9 +43,13 @@ namespace Rigel.Services.Impl
             return CategoryDto.MapToDto(category);
         }
 
-        public Task<CategoryDto> UpdateCategory(UpdateCategoryDto dto, string userId)
+        public async Task<CategoryDto> UpdateCategory(UpdateCategoryDto dto, string categoryId, string userId)
         {
-            throw new NotImplementedException();
+            Category? category = await _categoryRepository.FindById(categoryId);
+            if (category == null) // todo do smth with userid
+                throw new NotFoundException("category not found");
+            category.name = dto.name;
+            return CategoryDto.MapToDto(await _categoryRepository.Update(category));
         }
     }
 }

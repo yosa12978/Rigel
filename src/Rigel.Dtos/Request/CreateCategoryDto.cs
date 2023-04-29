@@ -4,6 +4,5 @@ namespace Rigel.Dtos.Request
     {
         [Required]
         public string name { get; set; } = default!;
-        public string shortcut { get; set; } = default!; // ??
     }
 }

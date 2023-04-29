@@ -4,6 +4,5 @@ namespace Rigel.Core.Models
     {
         public string name { get; set; } = default!;
         public List<Post> posts { get; set; } = default!;
-        public string shortcut { get; set; } = default!; //??
     }
 }
