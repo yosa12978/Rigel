@@ -4,8 +4,8 @@ namespace Rigel.Services.Interfaces
     {
         Task<Category> FindById(string id);
         Task<List<Category>> FindAll();
-        Task<Category?> CreateCategory(CreateCategoryDto dto, string userId);
-        Task<Category?> UpdateCategory(UpdateCategoryDto dto, string userId);
-        Task<Category?> DeleteCategory(string id, string userId);
+        Task<Category> CreateCategory(CreateCategoryDto dto, string userId);
+        Task<Category> UpdateCategory(UpdateCategoryDto dto, string userId);
+        Task<Category> DeleteCategory(string id, string userId);
     }
 }

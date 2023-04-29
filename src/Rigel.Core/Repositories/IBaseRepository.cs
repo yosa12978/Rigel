@@ -7,7 +7,7 @@ namespace Rigel.Core.Repositories
         Task<List<T>> FindAll();
         Task<T?> FindById(ID id);
         Task<T> Create(T entity);
-        Task<T?> Update(T entity);
-        Task<T?> Delete(T entity);
+        Task<T> Update(T entity);
+        Task<T> Delete(T entity);
     }
 }

@@ -11,36 +11,32 @@ namespace Rigel.Dtos.Response
         public DateTime pubDate { get; set; } = default!;
         public DateTime changeDate { get; set; } = default!;
 
-        public static Post? MapToObj(PostDto? dto) 
+        public static Post MapToObj(PostDto dto) 
         {
-            if (dto == null)
-                return null;
             return new Post
             {
                 id = dto.id,
                 subject = dto.subject,
                 pubDate = dto.pubDate,
                 categoryId = dto.categoryId,
-                category = CategoryDto.MapToObj(dto.category)!,
+                category = CategoryDto.MapToObj(dto.category),
                 authorId = dto.authorId,
-                author = UserDto.MapToObj(dto.author)!,
+                author = UserDto.MapToObj(dto.author),
                 changeDate = dto.changeDate,
             };
         }
 
-        public static PostDto? MapToDto(Post? obj)
+        public static PostDto MapToDto(Post obj)
         {
-            if (obj == null)
-                return null;
             return new PostDto
             {
                 id = obj.id,
                 subject = obj.subject,
                 pubDate = obj.pubDate,
                 categoryId = obj.categoryId,
-                category = CategoryDto.MapToDto(obj.category)!,
+                category = CategoryDto.MapToDto(obj.category),
                 authorId = obj.authorId,
-                author = UserDto.MapToDto(obj.author)!,
+                author = UserDto.MapToDto(obj.author),
                 changeDate = obj.changeDate,
             };
         }

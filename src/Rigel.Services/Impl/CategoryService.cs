@@ -4,12 +4,12 @@ namespace Rigel.Services.Impl
 {
     public class CategoryService : ICategoryService
     {
-        public Task<Category?> CreateCategory(CreateCategoryDto dto, string userId)
+        public Task<Category> CreateCategory(CreateCategoryDto dto, string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Category?> DeleteCategory(string id, string userId)
+        public Task<Category> DeleteCategory(string id, string userId)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +24,7 @@ namespace Rigel.Services.Impl
             throw new NotImplementedException();
         }
 
-        public Task<Category?> UpdateCategory(UpdateCategoryDto dto, string userId)
+        public Task<Category> UpdateCategory(UpdateCategoryDto dto, string userId)
         {
             throw new NotImplementedException();
         }

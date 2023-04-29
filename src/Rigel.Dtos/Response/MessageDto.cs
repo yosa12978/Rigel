@@ -13,10 +13,8 @@ namespace Rigel.Dtos.Response
         public string postId { get; set; } = default!;
         public PostDto post { get; set; } = default!;
         
-        public static Message? MapToObj(MessageDto? dto) 
+        public static Message MapToObj(MessageDto dto) 
         {
-            if (dto == null)
-                return null;
             return new Message
             {
                 id = dto.id,
@@ -27,14 +25,12 @@ namespace Rigel.Dtos.Response
                 authorId = dto.authorId,
                 author = UserDto.MapToObj(dto.author),
                 postId = dto.postId,
-                post = PostDto.MapToObj(dto.post)!,
+                post = PostDto.MapToObj(dto.post),
             };
         }
 
-        public static MessageDto? MapToDto(Message? obj)
+        public static MessageDto MapToDto(Message obj)
         {
-            if (obj == null)
-                return null;
             return new MessageDto
             {
                 id = obj.id,

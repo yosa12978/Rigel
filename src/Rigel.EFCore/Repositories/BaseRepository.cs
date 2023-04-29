@@ -16,11 +16,8 @@ namespace Rigel.EFCore.Repositories
             return entity;
         }
 
-        public virtual async Task<T?> Delete(T entity)
+        public virtual async Task<T> Delete(T entity)
         {
-            // T? entity = await _db.Set<T>().FindAsync(id);
-            // if (entity == null)
-            //     return null;
             _db.Set<T>().Remove(entity);
             await _db.SaveChangesAsync();
             return entity;
@@ -36,7 +33,7 @@ namespace Rigel.EFCore.Repositories
             return await _db.Set<T>().ToListAsync();
         }
 
-        public virtual async Task<T?> Update(T entity)
+        public virtual async Task<T> Update(T entity)
         {
             _db.Set<T>().Update(entity);
             await _db.SaveChangesAsync();

@@ -7,10 +7,8 @@ namespace Rigel.Dtos.Response
         // public List<PostResDto> posts { get; set; } = default!;
         public string shortcut { get; set; } = default!;
 
-        public static Category? MapToObj(CategoryDto? dto) 
+        public static Category MapToObj(CategoryDto dto) 
         {
-            if (dto == null)
-                return null;
             return new Category
             {
                 id = dto.id,
@@ -19,10 +17,8 @@ namespace Rigel.Dtos.Response
             };
         }
 
-        public static CategoryDto? MapToDto(Category? obj)
+        public static CategoryDto MapToDto(Category obj)
         {
-            if (obj == null)
-                return null;
             return new CategoryDto
             {
                 id = obj.id,

@@ -5,15 +5,17 @@ namespace Rigel.Services.Impl
     public class PostService : IPostService
     {
         private readonly IPostRepository _repo;
-        public PostService(IPostRepository repo)
+        private readonly IIdGenerator _idgen;
+        public PostService(IPostRepository repo, IIdGenerator idgen)
         {
             _repo = repo;
+            _idgen = idgen;
         }
-        public async Task<PostDto?> CreatePost(CreatePostDto dto, string userId)
+        public async Task<PostDto> CreatePost(CreatePostDto dto, string userId)
         {
             Post post = new Post
             {
-                id = Guid.NewGuid().ToString().Replace("-", ""),
+                id = _idgen.NewId(),
                 subject = dto.subject,
                 categoryId = dto.categoryId,
                 authorId = userId,
@@ -22,7 +24,7 @@ namespace Rigel.Services.Impl
             return PostDto.MapToDto(post);
         }
 
-        public async Task<PostDto?> DeletePost(string postId, string userId)
+        public async Task<PostDto> DeletePost(string postId, string userId)
         {
             Post? post = await _repo.FindById(postId);
             if (post == null || post.authorId != userId)
@@ -32,26 +34,31 @@ namespace Rigel.Services.Impl
 
         public async Task<List<PostDto>> FindAll()
         {
-            return (await _repo.FindAll()).Select(x => PostDto.MapToDto(x)!).ToList();
+            List<Post> posts = await _repo.FindAll();
+            return await Task.Run(() => posts.Select(x => PostDto.MapToDto(x)).ToList());
         }
 
-        public async Task<PostDto?> FindById(string postId)
+        public async Task<PostDto> FindById(string postId)
         {
-            return PostDto.MapToDto((await _repo.FindById(postId))!);
+            Post? post = await _repo.FindById(postId);
+            if (post == null)
+                throw new NotFoundException("post not found");
+            return PostDto.MapToDto(post);
         }
 
         public async Task<List<PostDto>> FindPostsByCategory(string categoryId)
         {
-            return (await _repo.FindCategoryPosts(categoryId)).Select(x => PostDto.MapToDto(x)!).ToList();
+            IEnumerable<Post> posts = await _repo.FindCategoryPosts(categoryId);
+            return await Task.Run(() => posts.Select(x => PostDto.MapToDto(x)).ToList());
         }
 
-        public async Task<PostDto?> UpdatePost(UpdatePostDto dto, string postId, string userId)
+        public async Task<PostDto> UpdatePost(UpdatePostDto dto, string postId, string userId)
         {
             Post? post = await _repo.FindById(postId);
             if (post == null || post.authorId != userId)
                 throw new NotFoundException("post not found");
             post.subject = dto.subject ?? post.subject;
-            return PostDto.MapToDto((await _repo.Update(post)));
+            return PostDto.MapToDto(await _repo.Update(post));
         }
     }
 }

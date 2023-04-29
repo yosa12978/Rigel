@@ -8,10 +8,8 @@ namespace Rigel.Dtos.Response
         public string avatar { get; set; } = default!;
         public DateTime regDate { get; set; } = default!;
         
-        public static User? MapToObj(UserDto? dto) 
+        public static User MapToObj(UserDto dto) 
         {
-            if (dto == null)
-                return null;
             return new User
             {
                 id = dto.id,
@@ -22,10 +20,8 @@ namespace Rigel.Dtos.Response
             };
         }
 
-        public static UserDto? MapToDto(User? obj)
+        public static UserDto MapToDto(User obj)
         {
-            if (obj == null)
-                return null;
             return new UserDto
             {
                 id = obj.id,
