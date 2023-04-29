@@ -8,6 +8,6 @@ namespace Rigel.Core.Repositories
         Task<T?> FindById(ID id);
         Task<T> Create(T entity);
         Task<T?> Update(T entity);
-        Task<T?> Delete(ID id);
+        Task<T?> Delete(T entity);
     }
 }

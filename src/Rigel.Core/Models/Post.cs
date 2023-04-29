@@ -2,7 +2,7 @@ namespace Rigel.Core.Models
 {
     public class Post : BaseModel<string>
     {
-        public string? subject { get; set; } = default!;
+        public string subject { get; set; } = default!;
         public string categoryId { get; set; } = default!;
         public Category category { get; set; } = default!;
         public string authorId { get; set; } = default!;
@@ -10,5 +10,7 @@ namespace Rigel.Core.Models
         public List<Message> messages { get; set; } = default!;
         public DateTime pubDate { get; set; } = DateTime.UtcNow;
         public DateTime changeDate { get; set; } = DateTime.UtcNow;
+        public bool Edited { get; set; } = false;
+        public bool Deleted { get; set; } = false;
     }
 }

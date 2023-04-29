@@ -7,9 +7,33 @@ namespace Rigel.Dtos.Response
         public string nickname { get; set; } = default!;
         public string avatar { get; set; } = default!;
         public DateTime regDate { get; set; } = default!;
-        public bool IsValid() 
+        
+        public static User? MapToObj(UserDto? dto) 
         {
-            return true;
+            if (dto == null)
+                return null;
+            return new User
+            {
+                id = dto.id,
+                username = dto.username,
+                nickname = dto.nickname,
+                avatar = dto.avatar,
+                regDate = dto.regDate,
+            };
+        }
+
+        public static UserDto? MapToDto(User? obj)
+        {
+            if (obj == null)
+                return null;
+            return new UserDto
+            {
+                id = obj.id,
+                username = obj.username,
+                nickname = obj.nickname,
+                avatar = obj.avatar,
+                regDate = obj.regDate,
+            };
         }
     }
 }
