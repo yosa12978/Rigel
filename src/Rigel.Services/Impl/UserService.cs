@@ -4,27 +4,34 @@ namespace Rigel.Services.Impl
 {
     public class UserService : IUserService
     {
-        public Task<User> CreateUser(CreateUserDto dto)
+        private readonly IUserRepository _userRepository;
+        private readonly IIdGenerator _idgen;
+        public UserService(IUserRepository userRepository, IIdGenerator idgen)
+        {
+            _userRepository = userRepository;
+            _idgen = idgen;
+        }
+        public Task<UserDto> CreateUser(CreateUserDto dto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> DeleteUser(string userId)
+        public Task<UserDto> DeleteUser(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> FindById(string userId)
+        public Task<UserDto> FindById(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> FindByUsername(string username)
+        public Task<UserDto> FindByUsername(string username)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> FindUser(string username, string password)
+        public Task<UserDto> FindUser(string username, string password)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +46,7 @@ namespace Rigel.Services.Impl
             throw new NotImplementedException();
         }
 
-        public Task<User> UpdateUser(UpdateUserDto dto, string userId)
+        public Task<UserDto> UpdateUser(UpdateUserDto dto, string userId)
         {
             throw new NotImplementedException();
         }

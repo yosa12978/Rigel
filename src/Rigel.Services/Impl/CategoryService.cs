@@ -4,27 +4,38 @@ namespace Rigel.Services.Impl
 {
     public class CategoryService : ICategoryService
     {
-        public Task<Category> CreateCategory(CreateCategoryDto dto, string userId)
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IIdGenerator _idgen;
+        public CategoryService(ICategoryRepository categoryRepository, IIdGenerator idgen)
+        {
+            _categoryRepository = categoryRepository;
+            _idgen = idgen;
+        }
+        public Task<CategoryDto> CreateCategory(CreateCategoryDto dto, string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Category> DeleteCategory(string id, string userId)
+        public Task<CategoryDto> DeleteCategory(string id, string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Category>> FindAll()
+        public async Task<List<CategoryDto>> FindAll()
         {
-            throw new NotImplementedException();
+            List<Category> categories = await _categoryRepository.FindAll();
+            return await Task.Run(() => categories.Select(x => CategoryDto.MapToDto(x)).ToList());
         }
 
-        public Task<Category> FindById(string id)
+        public async Task<CategoryDto> FindById(string id)
         {
-            throw new NotImplementedException();
+            Category? category = await _categoryRepository.FindById(id);
+            if (category == null)
+                throw new NotFoundException("category not found");
+            return CategoryDto.MapToDto(category);
         }
 
-        public Task<Category> UpdateCategory(UpdateCategoryDto dto, string userId)
+        public Task<CategoryDto> UpdateCategory(UpdateCategoryDto dto, string userId)
         {
             throw new NotImplementedException();
         }

@@ -4,32 +4,40 @@ namespace Rigel.Services.Impl
 {
     public class MessageService : IMessageService
     {
-        public Task<Message> CreateMessage(CreateMessageDto dto, string userId)
+        private readonly IIdGenerator _idgen;
+        private readonly IMessageRepository _messageRepository;
+        public MessageService(IMessageRepository messageRepository, IIdGenerator idgen)
+        {
+            _messageRepository = messageRepository;
+            _idgen = idgen;
+        }
+
+        public Task<MessageDto> CreateMessage(CreateMessageDto dto, string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Message> DeleteMessage(string messageId, string userId)
+        public Task<MessageDto> DeleteMessage(string messageId, string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Message> FindMessage(string messageId)
+        public Task<MessageDto> FindMessage(string messageId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Message>> FindPostMessages(string postId)
+        public Task<List<MessageDto>> FindPostMessages(string postId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Message> ReplyMessage(CreateMessageDto dto, string parentId, string userId)
+        public Task<MessageDto> ReplyMessage(CreateMessageDto dto, string parentId, string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Message> UpdateMessage(UpdateMessageDto dto, string userId)
+        public Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string userId)
         {
             throw new NotImplementedException();
         }

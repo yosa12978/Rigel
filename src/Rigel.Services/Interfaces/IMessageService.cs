@@ -2,11 +2,11 @@ namespace Rigel.Services.Interfaces
 {
     public interface IMessageService
     {
-        Task<List<Message>> FindPostMessages(string postId);
-        Task<Message> FindMessage(string messageId);
-        Task<Message> CreateMessage(CreateMessageDto dto, string userId);
-        Task<Message> UpdateMessage(UpdateMessageDto dto, string userId);
-        Task<Message> DeleteMessage(string messageId, string userId);
-        Task<Message> ReplyMessage(CreateMessageDto dto, string parentId, string userId);
+        Task<List<MessageDto>> FindPostMessages(string postId);
+        Task<MessageDto> FindMessage(string messageId);
+        Task<MessageDto> CreateMessage(CreateMessageDto dto, string userId);
+        Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string userId);
+        Task<MessageDto> DeleteMessage(string messageId, string userId);
+        Task<MessageDto> ReplyMessage(CreateMessageDto dto, string parentId, string userId);
     }
 }
