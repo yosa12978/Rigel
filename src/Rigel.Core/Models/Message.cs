@@ -11,7 +11,7 @@ namespace Rigel.Core.Models
         public User author { get; set; } = default!;
         public string postId { get; set; } = default!;
         public Post post { get; set; } = default!;
-        public bool Edited { get; set; } = false;
-        public bool Deleted { get; set; } = false;
+        public bool edited { get; set; } = false;
+        public bool deleted { get; set; } = false;
     }
 }

@@ -12,34 +12,65 @@ namespace Rigel.Services.Impl
             _idgen = idgen;
         }
 
-        public Task<MessageDto> CreateMessage(CreateMessageDto dto, string userId)
+        public async Task<MessageDto> CreateMessage(CreateMessageDto dto, string userId)
         {
-            throw new NotImplementedException();
+            Message message = new Message
+            {
+                id = _idgen.NewId(),
+                content = dto.content,
+                postId = dto.postId,
+                authorId = userId,
+                parentId = null,
+            };
+            await _messageRepository.Create(message);
+            return MessageDto.MapToDto(message);
         }
 
-        public Task<MessageDto> DeleteMessage(string messageId, string userId)
+        public async Task<MessageDto> DeleteMessage(string messageId, string userId)
         {
-            throw new NotImplementedException();
+            Message? message = await _messageRepository.FindById(messageId);
+            if (message == null || message.authorId != userId)
+                throw new NotFoundException("post not found");
+            await _messageRepository.Delete(message);
+            return MessageDto.MapToDto(message);
         }
 
-        public Task<MessageDto> FindMessage(string messageId)
+        public async Task<MessageDto> FindMessage(string messageId)
         {
-            throw new NotImplementedException();
+            Message? message = await _messageRepository.FindById(messageId);
+            if (message == null)
+                throw new NotFoundException("message not found");
+            return MessageDto.MapToDto(message);
         }
 
-        public Task<List<MessageDto>> FindPostMessages(string postId)
+        public async Task<List<MessageDto>> FindPostMessages(string postId)
         {
-            throw new NotImplementedException();
+            List<Message> messages = await _messageRepository.FindPostMessages(postId);
+            return await Task.Run(() => messages.Select(x => MessageDto.MapToDto(x)).ToList());
         }
 
-        public Task<MessageDto> ReplyMessage(CreateMessageDto dto, string parentId, string userId)
+        public async Task<MessageDto> ReplyMessage(CreateMessageDto dto, string parentId, string userId) // todo: merge with CreateMessage method
         {
-            throw new NotImplementedException();
+            Message message = new Message
+            {
+                id = _idgen.NewId(),
+                content = dto.content,
+                postId = dto.postId,
+                authorId = userId,
+                parentId = parentId,
+            };
+            await _messageRepository.Create(message);
+            return MessageDto.MapToDto(message);
         }
 
-        public Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string userId)
+        public async Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string messageId, string userId)
         {
-            throw new NotImplementedException();
+            Message? message = await _messageRepository.FindById(messageId);
+            if (message == null || message.authorId != userId)
+                throw new NotFoundException("post not found");
+            message.content = dto.content ?? message.content;
+            message.edited = true;
+            return MessageDto.MapToDto(await _messageRepository.Update(message));
         }
     }
 }

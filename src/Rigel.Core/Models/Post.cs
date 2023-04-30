@@ -10,7 +10,7 @@ namespace Rigel.Core.Models
         public List<Message> messages { get; set; } = default!;
         public DateTime pubDate { get; set; } = DateTime.UtcNow;
         public DateTime changeDate { get; set; } = DateTime.UtcNow;
-        public bool Edited { get; set; } = false;
-        public bool Deleted { get; set; } = false;
+        public bool edited { get; set; } = false;
+        public bool deleted { get; set; } = false;
     }
 }

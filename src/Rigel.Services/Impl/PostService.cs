@@ -58,6 +58,7 @@ namespace Rigel.Services.Impl
             if (post == null || post.authorId != userId)
                 throw new NotFoundException("post not found");
             post.subject = dto.subject ?? post.subject;
+            post.edited = true;
             return PostDto.MapToDto(await _repo.Update(post));
         }
     }

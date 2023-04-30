@@ -11,6 +11,6 @@ namespace Rigel.Core.Models
         public List<Message> messages { get; set; } = default!;
         public string role { get; set; } = Role.ROLE_USER;
         public DateTime regDate { get; set; } = DateTime.UtcNow;
-        public bool IsActive { get; set; } = true;
+        public bool isActive { get; set; } = true;
     }
 }
