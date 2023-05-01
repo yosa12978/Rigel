@@ -8,7 +8,7 @@ namespace Rigel.Services.Interfaces
         Task<UserDto> FindById(string userId);
         Task<UserDto> FindByUsername(string username);
         Task<UserDto> FindUser(string username, string password);
-        Task<bool> IsUserExist(string username, string password);
-        Task<bool> IsUsernameTaken(string username);
+        Task<UserDto> DisableUser(string userId);
+        Task<UserDto> EnableUser(string userId);
     }
 }

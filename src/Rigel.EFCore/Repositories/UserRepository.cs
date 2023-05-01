@@ -9,14 +9,24 @@ namespace Rigel.EFCore.Repositories
 
         }
 
-        public Task<bool> IsUserExist(string username, string passwordHash)
+        public async Task<User?> FindByUsername(string username)
         {
-            return _db.users.AnyAsync(x => x.username == username && x.password == passwordHash);
+            return await _db.users.FirstAsync(x => x.username == username);
         }
 
-        public Task<bool> IsUsernameTaken(string username)
+        public async Task<bool> IsUserExist(string username, string passwordHash)
         {
-            return _db.users.AnyAsync(x => x.username == username);
+            return await _db.users.AnyAsync(x => x.username == username && x.password == passwordHash);
+        }
+
+        public async Task<bool> IsUsernameTaken(string username)
+        {
+            return await _db.users.AnyAsync(x => x.username == username);
+        }
+
+        public async Task<User?> FindUser(string username, string password) 
+        {
+            return await _db.users.FirstAsync(x => x.username == username && x.password == password);
         }
     }
 }

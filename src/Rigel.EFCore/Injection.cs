@@ -9,7 +9,7 @@ namespace Rigel.EFCore
         public static IServiceCollection AddEFCoreRepositories(this IServiceCollection services, string connectionString) 
         {
             services.AddDbContext<DatabaseContext>(options => 
-                options.UseSqlite(connectionString, x=>x.MigrationsAssembly("Rigel.Migrations")));
+                options.UseSqlite(connectionString, x => x.MigrationsAssembly("Rigel.Migrations")));
             
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPostRepository, PostRepository>();

@@ -12,7 +12,7 @@ namespace Rigel.Services.Impl
             _idgen = idgen;
         }
 
-        public async Task<MessageDto> CreateMessage(CreateMessageDto dto, string userId)
+        public async Task<MessageDto> CreateMessage(CreateMessageDto dto, string userId, string? parentId = null)
         {
             Message message = new Message
             {
@@ -20,7 +20,7 @@ namespace Rigel.Services.Impl
                 content = dto.content,
                 postId = dto.postId,
                 authorId = userId,
-                parentId = null,
+                parentId = parentId,
             };
             await _messageRepository.Create(message);
             return MessageDto.MapToDto(message);
@@ -48,21 +48,7 @@ namespace Rigel.Services.Impl
             List<Message> messages = await _messageRepository.FindPostMessages(postId);
             return await Task.Run(() => messages.Select(x => MessageDto.MapToDto(x)).ToList());
         }
-
-        public async Task<MessageDto> ReplyMessage(CreateMessageDto dto, string parentId, string userId) // todo: merge with CreateMessage method
-        {
-            Message message = new Message
-            {
-                id = _idgen.NewId(),
-                content = dto.content,
-                postId = dto.postId,
-                authorId = userId,
-                parentId = parentId,
-            };
-            await _messageRepository.Create(message);
-            return MessageDto.MapToDto(message);
-        }
-
+        
         public async Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string messageId, string userId)
         {
             Message? message = await _messageRepository.FindById(messageId);
