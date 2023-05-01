@@ -15,6 +15,7 @@ namespace Rigel.Services.Impl
         {
             Category category = new Category
             {
+                id = _idgen.NewId(),
                 name = dto.name,
             };
             // todo do smth with userid;

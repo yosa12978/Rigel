@@ -21,6 +21,7 @@ namespace Rigel.Services.Impl
             string salt = await Task.Run(() => _ph.NewSalt(16));
             User user = new User
             {
+                id = _idgen.NewId(),
                 username = dto.username,
                 nickname = dto.username,
                 salt = salt,
