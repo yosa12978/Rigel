@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Rigel.Services.Interfaces;
 
 namespace Rigel.Services.Impl
@@ -6,10 +7,12 @@ namespace Rigel.Services.Impl
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IIdGenerator _idgen;
-        public CategoryService(ICategoryRepository categoryRepository, IIdGenerator idgen)
+        private readonly ILogger<CategoryService> _logger;
+        public CategoryService(ICategoryRepository categoryRepository, IIdGenerator idgen, ILogger<CategoryService> logger)
         {
             _categoryRepository = categoryRepository;
             _idgen = idgen;
+            _logger = logger;
         }
         public async Task<CategoryDto> CreateCategory(CreateCategoryDto dto, string userId)
         {
@@ -19,6 +22,7 @@ namespace Rigel.Services.Impl
                 name = dto.name,
             };
             // todo do smth with userid;
+            _logger.LogInformation($"creating category with id = {category.id}");
             return CategoryDto.MapToDto(await _categoryRepository.Create(category));
         }
 
@@ -27,12 +31,14 @@ namespace Rigel.Services.Impl
             Category? category = await _categoryRepository.FindById(id);
             if (category == null) // todo do smth with userid
                 throw new NotFoundException("category not found");
+            _logger.LogInformation($"deleting category with id = {category.id}");
             return CategoryDto.MapToDto(await _categoryRepository.Delete(category));
         }
 
         public async Task<List<CategoryDto>> FindAll()
         {
             List<Category> categories = await _categoryRepository.FindAll();
+            _logger.LogInformation("returning all categories");
             return await Task.Run(() => categories.Select(x => CategoryDto.MapToDto(x)).ToList());
         }
 
@@ -41,6 +47,7 @@ namespace Rigel.Services.Impl
             Category? category = await _categoryRepository.FindById(id);
             if (category == null)
                 throw new NotFoundException("category not found");
+            _logger.LogInformation($"returning category with id = {category.id}");
             return CategoryDto.MapToDto(category);
         }
 
@@ -50,6 +57,7 @@ namespace Rigel.Services.Impl
             if (category == null) // todo do smth with userid
                 throw new NotFoundException("category not found");
             category.name = dto.name;
+            _logger.LogInformation($"updating category with id = {category.id}");
             return CategoryDto.MapToDto(await _categoryRepository.Update(category));
         }
     }

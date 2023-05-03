@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Rigel.Services.Interfaces;
 
 namespace Rigel.Services.Impl 
@@ -6,10 +7,12 @@ namespace Rigel.Services.Impl
     {
         private readonly IIdGenerator _idgen;
         private readonly IMessageRepository _messageRepository;
-        public MessageService(IMessageRepository messageRepository, IIdGenerator idgen)
+        private readonly ILogger<MessageService> _logger;
+        public MessageService(IMessageRepository messageRepository, IIdGenerator idgen, ILogger<MessageService> logger)
         {
             _messageRepository = messageRepository;
             _idgen = idgen;
+            _logger = logger;
         }
 
         public async Task<MessageDto> CreateMessage(CreateMessageDto dto, string userId, string? parentId = null)
@@ -23,6 +26,7 @@ namespace Rigel.Services.Impl
                 parentId = parentId,
             };
             await _messageRepository.Create(message);
+            _logger.LogInformation($"creating message with id = {message.id}");
             return MessageDto.MapToDto(message);
         }
 
@@ -32,6 +36,7 @@ namespace Rigel.Services.Impl
             if (message == null || message.authorId != userId)
                 throw new NotFoundException("post not found");
             await _messageRepository.Delete(message);
+            _logger.LogInformation($"deleting message with id = {message.id}");
             return MessageDto.MapToDto(message);
         }
 
@@ -40,13 +45,15 @@ namespace Rigel.Services.Impl
             Message? message = await _messageRepository.FindById(messageId);
             if (message == null)
                 throw new NotFoundException("message not found");
+            _logger.LogInformation($"returning message with id = {message.id}");
             return MessageDto.MapToDto(message);
         }
 
-        public async Task<List<MessageDto>> FindPostMessages(string postId)
+        public async Task<PaginatedList<MessageDto>> FindPostMessages(string postId, int page = 1)
         {
             List<Message> messages = await _messageRepository.FindPostMessages(postId);
-            return await Task.Run(() => messages.Select(x => MessageDto.MapToDto(x)).ToList());
+            _logger.LogInformation($"returning messages with postId = {postId}");
+            return await Task.Run(() => new PaginatedList<MessageDto>(messages.Select(x => MessageDto.MapToDto(x)), page));
         }
         
         public async Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string messageId, string userId)
@@ -56,6 +63,7 @@ namespace Rigel.Services.Impl
                 throw new NotFoundException("post not found");
             message.content = dto.content ?? message.content;
             message.edited = true;
+            _logger.LogInformation($"updating message with id = {message.id}");
             return MessageDto.MapToDto(await _messageRepository.Update(message));
         }
     }
