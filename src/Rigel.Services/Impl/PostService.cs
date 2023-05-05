@@ -41,7 +41,7 @@ namespace Rigel.Services.Impl
         {
             List<Post> posts = await _repo.FindAll();
             _logger.LogInformation("returning posts");
-            return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page));
+            return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page)); // todo this is slow
         }
 
         public async Task<PostDto> FindById(string postId)
@@ -57,7 +57,7 @@ namespace Rigel.Services.Impl
         {
             IEnumerable<Post> posts = await _repo.FindCategoryPosts(categoryId);
             _logger.LogInformation($"returning posts with categoryId = {categoryId}");
-            return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page));
+            return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page)); // todo this is slow
         }
 
         public async Task<PostDto> UpdatePost(UpdatePostDto dto, string postId, string userId)

@@ -53,7 +53,7 @@ namespace Rigel.Services.Impl
         {
             List<Message> messages = await _messageRepository.FindPostMessages(postId);
             _logger.LogInformation($"returning messages with postId = {postId}");
-            return await Task.Run(() => new PaginatedList<MessageDto>(messages.Select(x => MessageDto.MapToDto(x)), page));
+            return await Task.Run(() => new PaginatedList<MessageDto>(messages.Select(x => MessageDto.MapToDto(x)), page)); // todo this is slow
         }
         
         public async Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string messageId, string userId)

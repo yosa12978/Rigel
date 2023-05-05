@@ -4,25 +4,21 @@ using Rigel.MVC.Models;
 
 namespace Rigel.MVC.Controllers;
 
-public class HomeController : Controller
+public class HomeController : BaseController<HomeController>
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        _logger = logger;
-    }
-
-    public IActionResult Index()
-    {
+        ViewBag.Categories = await _categoryService.FindAll();
         return View();
     }
-
+    
     public IActionResult Privacy()
     {
         return View();
     }
 
+    [Route("/error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

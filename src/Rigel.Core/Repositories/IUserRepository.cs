@@ -8,5 +8,6 @@ namespace Rigel.Core.Repositories
         Task<bool> IsUsernameTaken(string username);
         Task<User?> FindByUsername(string username);
         Task<User?> FindUser(string username, string password);
+        Task<bool> IsUserAdmin(string userId);
     }
 }

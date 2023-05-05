@@ -19,13 +19,13 @@ namespace Rigel.Dtos.Response
 
         public bool HasPreviousPage {
             get {
-                return (PageIndex > 0);
+                return (PageIndex > 1);
             }
         }
 
         public bool HasNextPage {
             get {
-                return (PageIndex+1 < TotalPages);
+                return (PageIndex < TotalPages);
             }
         }
     }

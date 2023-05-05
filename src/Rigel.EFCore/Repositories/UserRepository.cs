@@ -28,5 +28,10 @@ namespace Rigel.EFCore.Repositories
         {
             return await _db.users.FirstAsync(x => x.username == username && x.password == password);
         }
+
+        public async Task<bool> IsUserAdmin(string userId) 
+        {
+            return await _db.users.AnyAsync(x => x.id == userId && x.role == Role.ROLE_ADMIN);
+        }
     }
 }
