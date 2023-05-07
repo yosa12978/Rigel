@@ -49,11 +49,20 @@ namespace Rigel.Services.Impl
             return MessageDto.MapToDto(message);
         }
 
-        public async Task<PaginatedList<MessageDto>> FindPostMessages(string postId, int page = 1)
+        public async Task<PageDto<MessageDto>> FindPostMessages(string postId, int page = 1)
         {
             List<Message> messages = await _messageRepository.FindPostMessages(postId);
             _logger.LogInformation($"returning messages with postId = {postId}");
-            return await Task.Run(() => new PaginatedList<MessageDto>(messages.Select(x => MessageDto.MapToDto(x)), page)); // todo this is slow
+            //return await Task.Run(() => new PaginatedList<MessageDto>(messages.Select(x => MessageDto.MapToDto(x)), page));
+            var pl = new PaginatedList<Message>(messages, page);
+            return await Task.Run(() =>
+                new PageDto<MessageDto>(
+                    pl.Items.Select(x => MessageDto.MapToDto(x)), 
+                    pl.PageIndex,  
+                    pl.TotalCount, 
+                    pl.PageSize, 
+                    pl.TotalPages)
+                );
         }
         
         public async Task<MessageDto> UpdateMessage(UpdateMessageDto dto, string messageId, string userId)

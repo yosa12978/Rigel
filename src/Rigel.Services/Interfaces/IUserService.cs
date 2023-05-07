@@ -7,6 +7,7 @@ namespace Rigel.Services.Interfaces
         Task<UserDto> UpdateUser(UpdateUserDto dto, string userId);
         Task<UserDto> FindById(string userId);
         Task<UserDto> FindByUsername(string username);
+        //Task<PageDto<UserDto>> SearchUser(string username);
         Task<UserDto> FindUser(string username, string password);
         Task<UserDto> DisableUser(string userId);
         Task<UserDto> EnableUser(string userId);

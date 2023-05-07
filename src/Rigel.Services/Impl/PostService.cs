@@ -37,11 +37,20 @@ namespace Rigel.Services.Impl
             return PostDto.MapToDto(await _repo.Delete(post));
         }
 
-        public async Task<PaginatedList<PostDto>> FindAll(int page = 1)
+        public async Task<PageDto<PostDto>> FindAll(int page = 1)
         {
             List<Post> posts = await _repo.FindAll();
             _logger.LogInformation("returning posts");
-            return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page)); // todo this is slow
+            //return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page));
+            var pl = new PaginatedList<Post>(posts, page);
+            return await Task.Run(() =>
+                new PageDto<PostDto>(
+                    pl.Items.Select(x => PostDto.MapToDto(x)), 
+                    pl.PageIndex,  
+                    pl.TotalCount, 
+                    pl.PageSize, 
+                    pl.TotalPages)
+                );
         }
 
         public async Task<PostDto> FindById(string postId)
@@ -53,11 +62,20 @@ namespace Rigel.Services.Impl
             return PostDto.MapToDto(post);
         }
 
-        public async Task<PaginatedList<PostDto>> FindPostsByCategory(string categoryId, int page = 1)
+        public async Task<PageDto<PostDto>> FindPostsByCategory(string categoryId, int page = 1)
         {
             IEnumerable<Post> posts = await _repo.FindCategoryPosts(categoryId);
             _logger.LogInformation($"returning posts with categoryId = {categoryId}");
-            return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page)); // todo this is slow
+            //return await Task.Run(() => new PaginatedList<PostDto>(posts.Select(x => PostDto.MapToDto(x)), page));
+            var pl = new PaginatedList<Post>(posts, page);
+            return await Task.Run(() =>
+                new PageDto<PostDto>(
+                    pl.Items.Select(x => PostDto.MapToDto(x)), 
+                    pl.PageIndex,  
+                    pl.TotalCount, 
+                    pl.PageSize, 
+                    pl.TotalPages)
+                );
         }
 
         public async Task<PostDto> UpdatePost(UpdatePostDto dto, string postId, string userId)
