@@ -60,6 +60,63 @@ namespace Rigel.EFCore.Data
                 .HasOne(x => x.post)
                 .WithMany(x => x.messages)
                 .HasForeignKey(x => x.postId);
+
+            builder.Entity<User>().HasData(
+                new User {
+                    id = "Ul524hmF82",
+                    username = "admin",
+                    nickname = "master",
+                    password = "c73d82322484717cb277b3146a968928",
+                    salt = "adminsalt",
+                    avatar = "https://cdn-6.motorsport.com/images/mgl/Y99JQRbY/s8/red-bull-racing-logo-1.jpg"
+                }
+            );
+
+            builder.Entity<User>().HasData(
+                new User {
+                    id = "h80G46mN5p",
+                    username = "user",
+                    nickname = "slave",
+                    password = "22b1f2494b8b75f069b5b00cc29e07ef",
+                    salt = "usersalt",
+                    avatar = "https://cdn.gpblog.com/news/2023/05/07/v2_large_7daff622d2093db14e6e82ff5810c16d444b8a8a.jpeg"
+                }
+            );
+
+            builder.Entity<Category>().HasData(
+                new Category {
+                    id = "aS2Fg5J77o",
+                    name = "test"
+                }
+            );
+
+            builder.Entity<Post>().HasData(
+                new Post {
+                    id = "sdgweruhiq",
+                    subject = "test subject 1",
+                    categoryId = "aS2Fg5J77o",
+                    authorId = "h80G46mN5p"
+                }
+            );
+
+            builder.Entity<Message>().HasData(
+                new Message {
+                    id = "1234567890",
+                    content = "test content 123",
+                    authorId = "Ul524hmF82",
+                    postId = "sdgweruhiq"
+                }
+            );
+
+            builder.Entity<Message>().HasData(
+                new Message {
+                    id = "0987654321",
+                    content = "test reply 1",
+                    authorId = "h80G46mN5p",
+                    postId = "sdgweruhiq",
+                    parentId = "1234567890"
+                }
+            );
         }
 
         public DbSet<User> users { get; set; } = default!;
