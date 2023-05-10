@@ -21,7 +21,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error");
-    app.UseHsts();
+    //app.UseHsts();
 }
 
 app.UseHttpsRedirection();

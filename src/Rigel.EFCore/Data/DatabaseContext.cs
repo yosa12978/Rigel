@@ -69,10 +69,7 @@ namespace Rigel.EFCore.Data
                     password = "c73d82322484717cb277b3146a968928",
                     salt = "adminsalt",
                     avatar = "https://cdn-6.motorsport.com/images/mgl/Y99JQRbY/s8/red-bull-racing-logo-1.jpg"
-                }
-            );
-
-            builder.Entity<User>().HasData(
+                },
                 new User {
                     id = "h80G46mN5p",
                     username = "user",
@@ -86,13 +83,27 @@ namespace Rigel.EFCore.Data
             builder.Entity<Category>().HasData(
                 new Category {
                     id = "aS2Fg5J77o",
-                    name = "test"
+                    name = "test1"
+                },
+                new Category {
+                    id = "aS2Fg5J77g",
+                    name = "test2"
+                },
+                new Category {
+                    id = "aS2Fg5J77h",
+                    name = "test3"
                 }
             );
 
             builder.Entity<Post>().HasData(
                 new Post {
                     id = "sdgweruhiq",
+                    subject = "test subject 1",
+                    categoryId = "aS2Fg5J77o",
+                    authorId = "h80G46mN5p"
+                },
+                new Post {
+                    id = "sdgwe3uhi1",
                     subject = "test subject 1",
                     categoryId = "aS2Fg5J77o",
                     authorId = "h80G46mN5p"
@@ -105,10 +116,7 @@ namespace Rigel.EFCore.Data
                     content = "test content 123",
                     authorId = "Ul524hmF82",
                     postId = "sdgweruhiq"
-                }
-            );
-
-            builder.Entity<Message>().HasData(
+                },
                 new Message {
                     id = "0987654321",
                     content = "test reply 1",

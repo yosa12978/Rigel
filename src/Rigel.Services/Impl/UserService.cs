@@ -20,6 +20,8 @@ namespace Rigel.Services.Impl
         {
             if (dto.password != dto.password_confirm)
                 throw new BadRequestException("passwords doesnt match");
+            if (await _userRepository.IsUsernameTaken(dto.username))
+                throw new BadRequestException("username is already taken");
             string salt = await Task.Run(() => _ph.NewSalt(16));
             User user = new User
             {

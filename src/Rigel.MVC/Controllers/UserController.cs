@@ -6,17 +6,38 @@ namespace Rigel.MVC.Controllers
 {
     public class UserController : BaseController<UserController>
     {
-        [HttpPost("/user/login")]
-        public async Task<IActionResult> Login(string username, string password)
+        [HttpGet("/users/{id}")]
+        public async Task<IActionResult> GetUser([FromRoute] string id) 
         {
-            UserDto usr = await _userService.FindUser(username, password);
-            if (usr == null)
-            {
+            try {
+                ViewBag.User = await _userService.FindById(id);
+            }catch(Exception e) {
+                TempData["err"] = e.Message;
+                return Redirect("/error");
+            }
+            return View();
+        }
+        [HttpPost("/signup")]
+        public async Task<IActionResult> Signup([FromBody] CreateUserDto dto) 
+        {
+            try {
+                UserDto res = await _userService.CreateUser(dto);
+            } catch (Exception e) {
+                ViewBag.Error = e.Message;
+                return View();
+            }
+            return Redirect("/login");
+        }
+        [HttpPost("/login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
+        {
+            UserDto usr = await _userService.FindUser(dto.username, dto.password);
+            if (usr == null) {
                 ViewBag.Error = "Invalid credentials";
                 return View();
             }
             List<Claim> claims = new List<Claim> {
-                new Claim(ClaimTypes.Name, username), 
+                new Claim(ClaimTypes.Name, usr.username), 
                 new Claim(ClaimTypes.NameIdentifier, usr.id),
                // new Claim(ClaimTypes.Role, usr.Role), //todo fix this sh
             };

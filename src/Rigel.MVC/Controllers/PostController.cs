@@ -14,7 +14,8 @@ namespace Rigel.MVC.Controllers
             ViewBag.Post = await _postService.FindById(id);
             ViewBag.Messages = await _messageService.FindPostMessages(id, page);
             }catch (NotFoundException e) {
-                return NotFound(e.Message);
+                TempData["err"] = e.Message;
+                return Redirect("/error");
             }
             return View();
         }

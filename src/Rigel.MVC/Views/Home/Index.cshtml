@@ -1,8 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Rigel";
 }
+<style>
+    .postcard {
+        max-width: 1000px;
+        width: 100%;
+    }
+</style>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (ViewBag.Categories != null){
+    @foreach (var c in ViewBag.Categories)
+    {
+        <div class="card postcard border-secondary">
+            <div class="card-body">
+                <span><a href="/category/@c.id" class="text-dark"><b>@c.name</b></a></span>
+            </div>
+        </div><br>
+    }
+}

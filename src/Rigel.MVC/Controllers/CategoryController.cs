@@ -4,7 +4,7 @@ namespace Rigel.MVC.Controllers
 {
     public class CategoryController : BaseController<CategoryController> 
     {
-        [HttpGet("/category/{id}")]
+        [HttpGet("/categories/{id}")]
         public async Task<IActionResult> GetCategory([FromRoute] string id, [FromQuery] int page = 1)
         {
             ViewBag.Posts = await _postService.FindPostsByCategory(id, page);
